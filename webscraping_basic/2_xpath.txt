@@ -1,0 +1,44 @@
+# Python Web Scraping
+
+# Title : xpath
+# Date : 2020-08-09
+# Creator : tunealog
+
+# xpath Example
+# /School/Grade/Class/Student[index]
+# //*[@StudentNumber="1-1-5"]
+
+# /html/body/div/div/div/div/div/span/a
+# //*[@id="login"]/a
+
+<School name="Python High School">
+    <Grade value="1 Year">
+        <Class value="A Class">
+            
+            # Same Name - tunealog 
+            <Student value="No 1" StudentNumber="1-1-1">tunealog</Student>
+            
+            # Same Name - James
+            <Student value="No 2" StudentNumber="1-1-2">James</Student>
+            
+            <Student value="No 3" StudentNumber="1-1-3">Betty</Student>
+            <Student value="No 4" StudentNumber="1-1-4">Moriz</Student>
+            
+            # Same Name - tunealog 
+            <Student value="No 5" StudentNumber="1-1-5">tunealog</Student>
+        
+        </Class>
+        <Class value="B Class">
+        <Class value="C Class">
+        <Class value="D Class">
+    </Grade>
+    <Grade value="2 Year">
+        <Class value="B Class">
+
+            # Same Name - James
+            <Student value="No 1" StudentNumber="1-2-1">James</Student>
+        
+        </Class>
+    </Grade>
+    <Grade value="3 Year"/>
+</School>
