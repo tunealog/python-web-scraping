@@ -19,17 +19,38 @@ soup = BeautifulSoup(res.text, "lxml")
 items = soup.find_all("li", attrs={"class": re.compile("^search-product")})
 
 for item in items:
+
+    # Ignore Ad
+    ad_badge = item.find("span", attrs={"class": "ad-badge-text"})
+    if ad_badge:
+        print("<Ignore Ad>")
+        continue
+
     name = item.find("div", attrs={"class": "name"}).get_text()
+
+    # Ignore Apple
+    if "Apple" in name:
+        print("<Ignore Apple>")
+        continue
     price = item.find("strong", attrs={"class": "price-value"}).get_text()
+
+    # Rating
     rate = item.find("em", attrs={"class": "rating"})
     if rate:
         rate = rate.get_text()
     else:
-        rate = "none"
+        print("<Ignore none rating>")
+        continue
+
+    # Rating count
     rate_cnt = item.find(
         "span", attrs={"class": "rating-total-count"})
     if rate_cnt:
         rate_cnt = rate_cnt.get_text()
+        rate_cnt = rate_cnt[1:-1]
     else:
-        rate_cnt = "none"
-    print(name, price, rate, rate_cnt)
+        print("<Ignore none rating count>")
+        continue
+
+    if float(rate) >= 4.5 and int(rate_cnt) >= 100:
+        print(name, price, rate, rate_cnt)
