@@ -1,6 +1,6 @@
 # Python Web Scraping
 
-# Title : BeautifulSoup4
+# Title : Image Scraping
 # Date : 2020-08-24
 # Creator : tunealog
 
