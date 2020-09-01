@@ -5,6 +5,10 @@
 # Creator : tunealog
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 browser = webdriver.Chrome()  # "./chromedriver.exe"
 browser.maximize_window()
 
@@ -28,6 +32,9 @@ browser.find_element_by_xpath(
 
 browser.find_element_by_link_text("항공권 검색").click()
 
-elem = browser.find_element_by_xpath(
-    "//*[@id='content']/div[2]/div/div[4]/ul/li[1]")
-print(elem.text)
+try:
+    elem = WebDriverWait(browser, 10).until(EC.presence_of_element_located((
+        By.XPATH, "//*[@id='content']/div[2]/div/div[4]/ul/li[1]")))
+    print(elem.text)
+finally:
+    browser.quit()
