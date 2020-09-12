@@ -24,6 +24,11 @@ def scrape_weather():
     soup = BeautifulSoup(res.text, "lxml")
     # 흐림, 어제보다 OO°C 높아요
     cast = soup.find("p", attrs={"class": "cast_txt"}).get_text()
+    # 현재 OO°C (최저 OO°C / 최고 OO°C)
+    curr_temp = soup.find(
+        "p", attrs={"class": "info_temperature"}).get_text().replace("도씨", "")
+    min_temp = soup.find("span", attrs={"class": "min"}).get_text()
+    max_temp = soup.find("span", attrs={"class": "max"}).get_text()
 
 
 if __name__ == "__main__":
