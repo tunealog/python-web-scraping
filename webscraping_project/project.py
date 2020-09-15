@@ -22,7 +22,6 @@ def scrape_weather():
     res = requests.get(url)
     res.raise_for_status()
     soup = BeautifulSoup(res.text, "lxml")
-
     # 흐림, 어제보다 OO°C 높아요
     cast = soup.find("p", attrs={"class": "cast_txt"}).get_text()
     # 현재 OO°C (최저 OO°C / 최고 OO°C)
