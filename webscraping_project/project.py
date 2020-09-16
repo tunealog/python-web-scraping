@@ -29,6 +29,15 @@ def scrape_weather():
         "p", attrs={"class": "info_temperature"}).get_text().replace("도씨", "")
     min_temp = soup.find("span", attrs={"class": "min"}).get_text()
     max_temp = soup.find("span", attrs={"class": "max"}).get_text()
+    # 오전 강수확률 OO% / 오후 강수확률 OO%
+    morning_rain_rate = soup.find(
+        "span", attrs={"class": "point_time morning"}).get_text().strip()
+    afternoon_rain_rate = soup.find(
+        "span", attrs={"class": "point_time afternoon"}).get_text().strip()
+
+    print(cast)
+    print("현재 {} (최저 {} / 최고 {})".format(curr_temp, min_temp, max_temp))
+    print("오전 {} / 오후 {}".format(morning_rain_rate, afternoon_rain_rate))
 
 
 if __name__ == "__main__":
