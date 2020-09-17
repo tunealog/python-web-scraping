@@ -35,9 +35,20 @@ def scrape_weather():
     afternoon_rain_rate = soup.find(
         "span", attrs={"class": "point_time afternoon"}).get_text().strip()
 
+    # 미세먼지 OO㎍/㎥ 좋음
+    dust = soup.find("dl", attrs={"class": "indicator"})
+    pm10 = dust.find_all("dd")[0].get_text()
+    pm25 = dust.find_all("dd")[1].get_text()
+
+    # 초미세먼지 OO㎍/㎥ 좋음
+
     print(cast)
     print("현재 {} (최저 {} / 최고 {})".format(curr_temp, min_temp, max_temp))
     print("오전 {} / 오후 {}".format(morning_rain_rate, afternoon_rain_rate))
+    print()
+    print("미세먼지 {}".format(pm10))
+    print("초미세먼지 {}".format(pm25))
+    print()
 
 
 if __name__ == "__main__":
