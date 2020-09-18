@@ -7,6 +7,14 @@
 
 import requests
 from bs4 import BeautifulSoup
+
+
+def create_soup(url):
+    res = requests.get(url)
+    res.raise_for_status()
+    soup = BeautifulSoup(res.text, "lxml")
+    return soup
+
 # [오늘의 날씨]
 # 흐림, 어제보다 OO°C 높아요
 # 현재 OO°C (최저 OO°C / 최고 OO°C)
@@ -17,11 +25,9 @@ from bs4 import BeautifulSoup
 
 
 def scrape_weather():
-    print("오늘의 날씨")
+    print("[오늘의 날씨]")
     url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=%EC%84%9C%EC%9A%B8+%EB%82%A0%EC%94%A8"
-    res = requests.get(url)
-    res.raise_for_status()
-    soup = BeautifulSoup(res.text, "lxml")
+    soup = create_soup(url)
     # 흐림, 어제보다 OO°C 높아요
     cast = soup.find("p", attrs={"class": "cast_txt"}).get_text()
     # 현재 OO°C (최저 OO°C / 최고 OO°C)
@@ -36,11 +42,10 @@ def scrape_weather():
         "span", attrs={"class": "point_time afternoon"}).get_text().strip()
 
     # 미세먼지 OO㎍/㎥ 좋음
+    # 초미세먼지 OO㎍/㎥ 좋음
     dust = soup.find("dl", attrs={"class": "indicator"})
     pm10 = dust.find_all("dd")[0].get_text()
     pm25 = dust.find_all("dd")[1].get_text()
-
-    # 초미세먼지 OO㎍/㎥ 좋음
 
     print(cast)
     print("현재 {} (최저 {} / 최고 {})".format(curr_temp, min_temp, max_temp))
@@ -51,5 +56,12 @@ def scrape_weather():
     print()
 
 
+def scrape_headline_news():
+    print("[헤드라인 뉴스]")
+    url = "https://news.naver.com/"
+    soup = create_soup(url)
+
+
 if __name__ == "__main__":
-    scrape_weather()
+    # scrape_weather()
+    scrape_headline_news()
