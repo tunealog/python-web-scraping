@@ -15,6 +15,10 @@ def create_soup(url):
     soup = BeautifulSoup(res.text, "lxml")
     return soup
 
+
+def print_news(index, title, link):
+    print("{}. {}".format(index+1, title))
+    print("  (링크 : {})".format(link))
 # [오늘의 날씨]
 # 흐림, 어제보다 OO°C 높아요
 # 현재 OO°C (최저 OO°C / 최고 OO°C)
@@ -65,11 +69,29 @@ def scrape_headline_news():
     for index, news in enumerate(news_list):
         title = news.div.a.get_text().strip()
         link = url + news.find("a")["href"]
-        print("{}. {}".format(index+1, title))
-        print("  (링크 : {})".format(link))
+        print_news(index, title, link)
+    print()
+
+
+def scrape_it_news():
+    print("[IT 뉴스]")
+    url = "https://news.naver.com/main/list.nhn?mode=LS2D&mid=shm&sid1=105&sid2=230"
+    soup = create_soup(url)
+    news_list = soup.find(
+        "ul", attrs={"class": "type06_headline"}).find_all("li", limit=3)
+    for index, news in enumerate(news_list):
+        a_idx = 0
+        img = news.find("img")
+        if img:
+            a_idx = 1
+        a_tag = news.find_all("a")[a_idx]
+        title = a_tag.get_text().strip()
+        link = a_tag["href"]
+        print_news(index, title, link)
     print()
 
 
 if __name__ == "__main__":
     # scrape_weather()
-    scrape_headline_news()
+    # scrape_headline_news()
+    scrape_it_news()
