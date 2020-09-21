@@ -19,13 +19,6 @@ def create_soup(url):
 def print_news(index, title, link):
     print("{}. {}".format(index+1, title))
     print("  (링크 : {})".format(link))
-# [오늘의 날씨]
-# 흐림, 어제보다 OO°C 높아요
-# 현재 OO°C (최저 OO°C / 최고 OO°C)
-# 오전 강수확률 OO% / 오후 강수확률 OO%
-
-# 미세먼지 OO㎍/㎥ 좋음
-# 초미세먼지 OO㎍/㎥ 좋음
 
 
 def scrape_weather():
@@ -94,4 +87,4 @@ def scrape_it_news():
 if __name__ == "__main__":
     # scrape_weather()
     # scrape_headline_news()
-    scrape_it_news()
+    # scrape_it_news()
