@@ -25,6 +25,7 @@ def scrape_weather():
     print("[오늘의 날씨]")
     url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=%EC%84%9C%EC%9A%B8+%EB%82%A0%EC%94%A8"
     soup = create_soup(url)
+
     # 흐림, 어제보다 OO°C 높아요
     cast = soup.find("p", attrs={"class": "cast_txt"}).get_text()
     # 현재 OO°C (최저 OO°C / 최고 OO°C)
