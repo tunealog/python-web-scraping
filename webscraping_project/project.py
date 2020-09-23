@@ -85,7 +85,15 @@ def scrape_it_news():
     print()
 
 
+def scrape_english():
+    print("[오늘의 영어회화]")
+    url = "https://www.hackers.co.kr/?c=s_eng/eng_contents/I_others_english&keywd=haceng_submain_lnb_eng_I_others_english&logger_kw=haceng_submain_lnb_eng_I_others_english#;"
+    soup = create_soup(url)
+    print()
+
+
 if __name__ == "__main__":
     # scrape_weather()
     # scrape_headline_news()
     # scrape_it_news()
+    scrape_english()
