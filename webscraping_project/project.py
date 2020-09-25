@@ -91,6 +91,8 @@ def scrape_english():
     soup = create_soup(url)
     sentences = soup.find_all("div", attrs={"id": re.compile("^conv_kor_t")})
     print("영어 지문")
+    for sentence in sentences[len(sentences)//2:]:
+        print(sentence.get_text().strip())
     print()
 
 
