@@ -90,8 +90,11 @@ def scrape_english():
     url = "https://www.hackers.co.kr/?c=s_eng/eng_contents/I_others_english&keywd=haceng_submain_lnb_eng_I_others_english&logger_kw=haceng_submain_lnb_eng_I_others_english#;"
     soup = create_soup(url)
     sentences = soup.find_all("div", attrs={"id": re.compile("^conv_kor_t")})
-    print("영어 지문")
+    print("(영어 지문)")
     for sentence in sentences[len(sentences)//2:]:
+        print(sentence.get_text().strip())
+    print("(한글 지문)")
+    for sentence in sentences[:len(sentences)//2]:
         print(sentence.get_text().strip())
     print()
 
