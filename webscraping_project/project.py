@@ -28,11 +28,13 @@ def scrape_weather():
 
     # 흐림, 어제보다 OO°C 높아요
     cast = soup.find("p", attrs={"class": "cast_txt"}).get_text()
+
     # 현재 OO°C (최저 OO°C / 최고 OO°C)
     curr_temp = soup.find(
         "p", attrs={"class": "info_temperature"}).get_text().replace("도씨", "")
     min_temp = soup.find("span", attrs={"class": "min"}).get_text()
     max_temp = soup.find("span", attrs={"class": "max"}).get_text()
+
     # 오전 강수확률 OO% / 오후 강수확률 OO%
     morning_rain_rate = soup.find(
         "span", attrs={"class": "point_time morning"}).get_text().strip()
@@ -93,6 +95,7 @@ def scrape_english():
     print("(영어 지문)")
     for sentence in sentences[len(sentences)//2:]:
         print(sentence.get_text().strip())
+    print()
     print("(한글 지문)")
     for sentence in sentences[:len(sentences)//2]:
         print(sentence.get_text().strip())
@@ -100,7 +103,7 @@ def scrape_english():
 
 
 if __name__ == "__main__":
-    # scrape_weather()
-    # scrape_headline_news()
-    # scrape_it_news()
+    scrape_weather()
+    scrape_headline_news()
+    scrape_it_news()
     scrape_english()
